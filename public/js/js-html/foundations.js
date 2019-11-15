@@ -5,11 +5,12 @@ $(document).ready(function(){
   let cardWrapper = $('#card-wrapper')
 
   const displayCards = (arr) => {
-    arr.each(function(){
-      let display =
-      ``
+    arr.each(function(i){
+      console.log($(this).name);
+    
       cardWrapper.append()
     })
   }
+  displayCards(foundations)
 
 })
