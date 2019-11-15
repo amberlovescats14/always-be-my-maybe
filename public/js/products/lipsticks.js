@@ -201,4 +201,4 @@ const lipsticks = [
       }
 ]
 
-export default lipsticks
+module.exports = lipsticks

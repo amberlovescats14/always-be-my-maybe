@@ -64,4 +64,4 @@ const eyeshadows = [
   }
 ]
 
-export default eyeshadows
+module.exports = eyeshadows

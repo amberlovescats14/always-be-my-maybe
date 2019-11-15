@@ -64,4 +64,4 @@ const foundations = [
   }
 ]
 
-export default foundations
+module.exports = foundations
