@@ -14,7 +14,7 @@ module.exports = {
   // where to put the transpiled javascript
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'main.js'
+    filename: '[name].main.js'
   },
 
   // babel config
