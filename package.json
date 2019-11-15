@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "server": "nodemon server"
-    },
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/always-be-my-maybe-deimos/always-be-my-maybe.git"
@@ -25,10 +25,12 @@
     "config": "^3.2.4",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
+    "jquery": "^3.4.1",
     "mongoose": "^5.7.10",
     "nodemon": "^1.19.4",
     "path": "^0.12.7",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "uuidv4": "^6.0.0"
   },
   "proxy": "http://localhost:3001"
 }
