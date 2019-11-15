@@ -1,0 +1,41 @@
+// for resolving the absolute path to our project
+// necessary for webpack
+const path = require('path');
+
+module.exports = {
+  mode: "development",
+
+  // where our app "starts"
+  entry: {
+    index : './public/js/index.js',
+    foundations: './public/js/js-html/foundations.js'
+
+  },
+  // where to put the transpiled javascript
+  output: {
+    path: path.resolve(__dirname, 'public'),
+    filename: 'main.js'
+  },
+
+  // babel config
+  module: {
+    rules: [
+      {
+        // anything file that ends with '.js'
+        test: /\.js$/,
+        // except those in "node_modules"
+        exclude: /node_modules/,
+        // transform with babel
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+    ]
+  },
+
+  // allows us to see how the transpiled js relates to the untranspiled js
+  devtool: 'source-map'
+};
