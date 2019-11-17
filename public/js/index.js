@@ -1,7 +1,11 @@
-let button = document.getElementById('click')
+'use strict';
 
-const changePage = () => {
-  window.location = '/products.html'
-}
+const $ = require('jquery');
 
-button.addEventListener('click', changePage)
+$(document).ready(function () {
+$('.carousel.carousel-slider').carousel({
+  fullWidth: true
+});
+
+
+});

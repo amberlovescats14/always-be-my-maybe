@@ -1,46 +1,86 @@
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Always-Be-My-Maybe</title>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="./css/products.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Always-Be-My-Maybe</title>
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/4db56fe07d.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
 <!-- carousel -->
-<header>
-  <a href="">MAKEUP</a>
-  <a href="">BRUSHES + TOOLS</a>
-  <a href="">ACCESSORIES</a>
-  <a href="">LOTION</a>
-  <a href=""><i class="large material-icons">shopping_basket</i></a>
+<header class="sticky-top">
+    <ul id="header">
+        <li><a class="pink" href="">MAKEUP</a></li>
+        <li><a class="yellow" href="">BRUSHES + TOOLS</a></li>
+        <li id="logo">
+            <div class="logoTop">ALWAYS</div>
+            <div class="logoMid">BE MY</div>
+            <div class="logoBottom">MAYBE</div>
+        </li>
+        <li><a class="pink" href="">ACCESSORIES</a></li>
+        <li><a class="yellow" href="">LOTION</a></li>
+        <li id="checkout"><a class="pink" href=""><i class="fas fa-shopping-bag"></i>
+            <p class="yellow">$0.00</p></a></li>
+    </ul>
 </header>
-<div class="carousel carousel-slider"
-     data-indicators="true">
-  <a href="#one" class="carousel-item"><img src="https://images.unsplash.com/photo-1573706376056-55f27105ff17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="img"></a>
-  <a href="#two" class="carousel-item"><img src="https://images.unsplash.com/photo-1573697610008-4c72b4e9508f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="img"></a>
-  <a href="#three" class="carousel-item"><img src="https://images.unsplash.com/photo-1573665774502-1fbe81d4d7f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="img"></a>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="images/carousel-3.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="images/carousel-4.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="images/carousel-5.png" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 <!-- end carousel -->
-
-
-
-
-
+<div id="shop">
+    <h2>SHOP</h2>
+    <div>
+        <div><h3>MAKEUP</h3></div>
+        <div>
+          <h3>BRUSHES</h3>
+          <h3>+</h3>
+          <h3>TOOLS</h3>
+        </div>
+        <div><h3>ACCESSORIES</h3></div>
+        <div><h3>LOTION</h3></div>
+    </div>
+</div>
 
 <script
         src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
 <!-- materialize -->
-
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <!-- custom -->
 <script src="./index.main.js"></script>
+<script src="js/index.js"></script>
 
 
 </body>
