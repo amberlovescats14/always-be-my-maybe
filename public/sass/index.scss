@@ -1,6 +1,8 @@
 body{
   background-image: linear-gradient(#CE96FB, #FF8FCF);
+
 }
+
 //////////////////////////
 ///////HEADER/////////////
 //////////////////////////
@@ -68,7 +70,6 @@ header{
 /////////////////////////////////////////
 
 #carouselExampleControls{
-  margin-top: 10vh;
   margin-bottom: 10vh;
 }
 
@@ -77,4 +78,77 @@ header{
 ///////////////////////////////////////////
 ///////////////SHOP///////////////////////
 /////////////////////////////////////////
+#shop{
+  background: rgba(255, 255, 255, 0.7);
+  height: 45vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  box-shadow: 4px 4px 4px;
+}
+#shopHeader{
+  text-align: center;
+}
+.shopMenu{
+  display: flex;
+  justify-content: space-evenly;
+}
 
+.shop{
+  border: black 1px solid;
+  border-radius: 7%;
+  text-align: center;
+  height: 300px;
+  width: 200px;
+}
+.shopButton{
+
+}
+
+////////////////SHOP END//////////////////////////
+
+///////////////////////////////////////////
+///////////////FOR SALE///////////////////
+/////////////////////////////////////////
+
+#onSale{
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+
+////////////////FOR SALE END//////////////////////////
+
+///////////////////////////////////////////
+///////////////FOOTER/////////////////////
+/////////////////////////////////////////
+footer{
+  background-color: black;
+  height: 40vh;
+}
+#banner{
+  display: flex;
+}
+#ban1{
+  width: 50vw;
+}
+#ban2{
+  width: 50vw;
+}
+#footer{
+  padding-top: 30px;
+  list-style: none;
+  display: flex;
+  background-color: black;
+}
+#footer li a{
+  padding: 30px 30px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#footer li a:hover{
+  color: white;
+}
+.foot{
+  font-size: 30px;
+}
