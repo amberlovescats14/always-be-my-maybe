@@ -57,3 +57,7 @@ header{
 .fa-shopping-bag{
   font-size: 30px;
 }
+#banner-foundation {
+  width: 100vw;
+  height: 400px;
+}
