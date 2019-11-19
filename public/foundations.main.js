@@ -11045,24 +11045,21 @@ exports.fromString = fromString;
 /*!******************************************!*\
   !*** ./public/js/js-html/foundations.js ***!
   \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _products_foundations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../products/foundations */ "./public/js/products/foundations.js");
 
-var foundations = __webpack_require__(/*! ../products/foundations */ "./public/js/products/foundations.js");
 
-$(document).ready(function () {
-  var cardWrapper = $('#card-wrapper');
-
-  var displayCards = function displayCards(arr) {
-    arr.each(function (i) {
-      console.log($(this).name);
-      cardWrapper.append();
-    });
-  };
-
-  displayCards(foundations);
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  var idArr = [];
+  console.log("foundations: ", _products_foundations__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  var cardWrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#card-wrapper');
+  _products_foundations__WEBPACK_IMPORTED_MODULE_1__["default"].forEach(function (f, i) {});
 });
 
 /***/ }),
@@ -11071,74 +11068,76 @@ $(document).ready(function () {
 /*!*******************************************!*\
   !*** ./public/js/products/foundations.js ***!
   \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var _require = __webpack_require__(/*! uuidv4 */ "./node_modules/uuidv4/build/lib/uuidv4.js"),
-    uuid = _require.uuid;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var uuidv4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuidv4 */ "./node_modules/uuidv4/build/lib/uuidv4.js");
+/* harmony import */ var uuidv4__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuidv4__WEBPACK_IMPORTED_MODULE_0__);
 
 var foundations = [{
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #100",
   description: "Fair-Neutral",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #105",
   description: "Fair-Warm",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #110",
   description: "Fair-Pink",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #130",
   description: "Fair-Olive",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #270",
   description: "Medium-Neutral",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #280",
   description: "Medium-Warm",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #290",
   description: "Medium-Pink",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #300",
   description: "Medium-Olive",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #450",
   description: "Tan-Neutral",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #460",
   description: "Tan-Warm",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #470",
   description: "Tan-Pink",
   price: 35.00
 }, {
-  id: uuid(),
+  id: Object(uuidv4__WEBPACK_IMPORTED_MODULE_0__["uuid"])(),
   color: "Foundation #500",
   description: "Tan-Olive",
   price: 35.00
 }];
-module.exports = foundations;
+/* harmony default export */ __webpack_exports__["default"] = (foundations);
 
 /***/ })
 

@@ -1,16 +1,12 @@
-const $ = require('jquery')
-const foundations = require('../products/foundations')
+import $ from 'jquery'
+import foundations from '../products/foundations'
 
 $(document).ready(function(){
+  let idArr = []
+  console.log("foundations: ", foundations)
   let cardWrapper = $('#card-wrapper')
-
-  const displayCards = (arr) => {
-    arr.each(function(i){
-      console.log($(this).name);
-    
-      cardWrapper.append()
-    })
-  }
-  displayCards(foundations)
+  foundations.forEach((f,i)=> {
+  
+  })
 
 })
