@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import foundations from '../products/foundations'
-import cart from '../products/cart'
+// import cart from '../products/cart'
 import {postItem } from '../api'
 
 $(document).ready(function(){
@@ -49,8 +49,11 @@ $(document).ready(function(){
         console.log("found: ", f)
         // cart.push(f)
         postItem(f)
-        console.log("cart: ", cart)
-        return alert(`Foundation ${f.color} Added To Cart`)
+            .then((res)=> res.json())
+            .then((data)=> console.log("DATA", data))
+            .catch(()=> console.log(`POST ERROR`))
+        // console.log("cart: ", cart)
+        // return alert(`Foundation ${f.color} Added To Cart`)
       }
     })
   }
