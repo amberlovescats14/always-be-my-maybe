@@ -1,4 +1,4 @@
-const {uuid} = require('uuidv4')
+import {uuid} from 'uuidv4'
 
 const foundations = [
   {
@@ -64,4 +64,4 @@ const foundations = [
   }
 ]
 
-module.exports = foundations
+export default foundations

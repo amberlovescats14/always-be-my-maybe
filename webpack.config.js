@@ -8,7 +8,8 @@ module.exports = {
   // where our app "starts"
   entry: {
     index : './public/js/index.js',
-    foundations: './public/js/js-html/foundations.js'
+    foundations: './public/js/js-html/foundations.js',
+    cart: './public/js/js-html/cart.js'
 
   },
   // where to put the transpiled javascript

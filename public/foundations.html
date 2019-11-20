@@ -5,39 +5,43 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="./css/products.css">
+  
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--  END MATERIAL-->
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/found.css">
 
   <title>Products</title>
 </head>
 <body id="foundations">
-<div class="navbar-fixed">
-    <nav class="black">
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Logo</a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
-          </ul>
-        </div>
-      </nav>
-    
-      <ul class="sidenav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
-      </ul>
-</div>
+<header class="sticky-top">
+  <ul id="header">
+    <li><a class="pink" href="">MAKEUP</a></li>
+    <li><a class="yellow" href="">BRUSHES + TOOLS</a></li>
+    <li id="logo">
+      <div class="logoTop">ALWAYS</div>
+      <div class="logoMid">BE MY</div>
+      <div class="logoBottom">MAYBE</div>
+    </li>
+    <li><a class="pink" href="">ACCESSORIES</a></li>
+    <li><a class="yellow" href="">LOTION</a></li>
+    <li id="checkout"><a class="pink" href=""><i class="fas fa-shopping-bag"></i>
+      <p class="yellow">$0.00</p></a></li>
+  </ul>
+</header>
 <!-- end nav -->
 <!-- Banner -->
-<img src="./images/jumbotron.jpeg" alt="img" class="responsive-img">
+<img src="./images/jumbotron.jpeg" alt="img" class="responsive-img" id="banner-foundation">
 <!-- end banner -->
 <!-- cards -->
-<div id="cards-wrapper"></div>
+<div id="cards-wrapper" class="row"></div>
 <!-- end cards -->
 
 
