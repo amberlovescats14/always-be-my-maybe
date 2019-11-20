@@ -11095,8 +11095,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _products_foundations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../products/foundations */ "./public/js/products/foundations.js");
-/* harmony import */ var _products_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../products/cart */ "./public/js/products/cart.json");
-var _products_cart__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../products/cart */ "./public/js/products/cart.json", 1);
+!(function webpackMissingModule() { var e = new Error("Cannot find module '../products/cart'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api */ "./public/js/api.js");
 
 
@@ -11130,7 +11129,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
         console.log("found: ", f); // cart.push(f)
 
         Object(_api__WEBPACK_IMPORTED_MODULE_3__["postItem"])(f);
-        console.log("cart: ", _products_cart__WEBPACK_IMPORTED_MODULE_2__);
+        console.log("cart: ", !(function webpackMissingModule() { var e = new Error("Cannot find module '../products/cart'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
         return alert("Foundation ".concat(f.color, " Added To Cart"));
       }
     });
@@ -11138,18 +11137,6 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 
   displayFoundations();
 });
-
-/***/ }),
-
-/***/ "./public/js/products/cart.json":
-/*!**************************************!*\
-  !*** ./public/js/products/cart.json ***!
-  \**************************************/
-/*! exports provided: cart, default */
-/***/ (function(module) {
-
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../products/cart'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
 
 /***/ }),
 
