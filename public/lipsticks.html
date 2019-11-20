@@ -14,10 +14,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--  END MATERIAL-->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/found.css">
-    <title>Title</title>
+    <title>Lipsticks</title>
     <style>
         img {
             max-height: 300px;
@@ -27,6 +25,19 @@
         .card-img {
             display: flex;
             justify-content: center;
+        }
+        h5 {
+            height: 40px;
+            width: 100%;
+        }
+        .container {
+            width: 1070px; /* specify a width */
+            margin: 0 auto;  /* centers the container */
+            padding: 0 15px; /* adds some padding to the left and right*/
+        }
+
+        .jumbotron .container {
+            max-width: 100%; /* allows the jumbotron to adjust on smaller widths */
         }
     </style>
 </head>
@@ -48,7 +59,11 @@
 </header>
 <!-- end nav -->
 <!-- Banner -->
-<img src="./images/jumbotron.jpeg" alt="img" class="responsive-img" id="banner-foundation">
+<div class="jumbotron">
+    <div class="container">
+        <img src="./images/jumbotron2.jpeg" alt="img" class="responsive-img" id="banner-foundation">
+    </div>
+</div>
 <!-- end banner -->
 <!-- cards -->
 <div id="cards-wrapper" class="row"></div>
@@ -67,6 +82,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <!-- custum -->
-<script src="js/products/lipsticks.js"></script>
+<script src="./lipstick.main.js"></script>
 </body>
 </html>
