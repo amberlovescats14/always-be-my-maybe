@@ -11148,7 +11148,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 /*! exports provided: cart, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"cart\":[]}");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '../products/cart'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+
 
 /***/ }),
 
