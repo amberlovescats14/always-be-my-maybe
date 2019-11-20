@@ -11041,6 +11041,48 @@ exports.fromString = fromString;
 
 /***/ }),
 
+/***/ "./public/js/api.js":
+/*!**************************!*\
+  !*** ./public/js/api.js ***!
+  \**************************/
+/*! exports provided: getItems, postItem */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getItems", function() { return getItems; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postItem", function() { return postItem; });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+var getItems = function getItems() {
+  return fetch('/api/cart').then(function (res) {
+    return res.json();
+  })["catch"](function () {
+    return console.log("GET ERROR");
+  });
+};
+var postItem = function postItem(item) {
+  var id = item.id,
+      color = item.color,
+      description = item.description,
+      price = item.price;
+  var options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(item)
+  };
+  return fetch('/api/cart', options).then(function (res) {
+    return res.json();
+  })["catch"](function () {
+    return console.log("POST ERROR");
+  });
+};
+
+/***/ }),
+
 /***/ "./public/js/js-html/foundations.js":
 /*!******************************************!*\
   !*** ./public/js/js-html/foundations.js ***!
@@ -11053,7 +11095,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _products_foundations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../products/foundations */ "./public/js/products/foundations.js");
-/* harmony import */ var _products_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../products/cart */ "./public/js/products/cart.js");
+/* harmony import */ var _products_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../products/cart */ "./public/js/products/cart.json");
+var _products_cart__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../products/cart */ "./public/js/products/cart.json", 1);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api */ "./public/js/api.js");
+
 
 
 
@@ -11082,9 +11127,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   var findItem = function findItem(num) {
     _products_foundations__WEBPACK_IMPORTED_MODULE_1__["default"].forEach(function (f, i) {
       if (f.id === num) {
-        console.log("found: ", f);
-        _products_cart__WEBPACK_IMPORTED_MODULE_2__["default"].push(f);
-        console.log("cart: ", _products_cart__WEBPACK_IMPORTED_MODULE_2__["default"]);
+        console.log("found: ", f); // cart.push(f)
+
+        Object(_api__WEBPACK_IMPORTED_MODULE_3__["postItem"])(f);
+        console.log("cart: ", _products_cart__WEBPACK_IMPORTED_MODULE_2__);
         return alert("Foundation ".concat(f.color, " Added To Cart"));
       }
     });
@@ -11095,17 +11141,14 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 
 /***/ }),
 
-/***/ "./public/js/products/cart.js":
-/*!************************************!*\
-  !*** ./public/js/products/cart.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./public/js/products/cart.json":
+/*!**************************************!*\
+  !*** ./public/js/products/cart.json ***!
+  \**************************************/
+/*! exports provided: cart, default */
+/***/ (function(module) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var cart = [];
-/* harmony default export */ __webpack_exports__["default"] = (cart);
+module.exports = JSON.parse("{\"cart\":[]}");
 
 /***/ }),
 

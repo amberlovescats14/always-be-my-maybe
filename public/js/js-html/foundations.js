@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import foundations from '../products/foundations'
 import cart from '../products/cart'
+import {postItem } from '../api'
 
 $(document).ready(function(){
   let idArr = []
@@ -46,7 +47,8 @@ $(document).ready(function(){
     foundations.forEach((f,i)=> {
       if(f.id === num){
         console.log("found: ", f)
-        cart.push(f)
+        // cart.push(f)
+        postItem(f)
         console.log("cart: ", cart)
         return alert(`Foundation ${f.color} Added To Cart`)
       }

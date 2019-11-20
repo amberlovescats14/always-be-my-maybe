@@ -10707,26 +10707,24 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _products_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../products/cart */ "./public/js/products/cart.js");
+/* harmony import */ var _products_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../products/cart */ "./public/js/products/cart.json");
+var _products_cart__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../products/cart */ "./public/js/products/cart.json", 1);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
-  console.log('cart:', _products_cart__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  console.log('cart:', _products_cart__WEBPACK_IMPORTED_MODULE_1__);
 });
 
 /***/ }),
 
-/***/ "./public/js/products/cart.js":
-/*!************************************!*\
-  !*** ./public/js/products/cart.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./public/js/products/cart.json":
+/*!**************************************!*\
+  !*** ./public/js/products/cart.json ***!
+  \**************************************/
+/*! exports provided: cart, default */
+/***/ (function(module) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var cart = [];
-/* harmony default export */ __webpack_exports__["default"] = (cart);
+module.exports = JSON.parse("{\"cart\":[]}");
 
 /***/ })
 
