@@ -3,29 +3,16 @@ body{
 
   header{
     background-color: black;
-    height: 12vh;
+    height: 20vh;
+    border: 2px solid yellow;
+
     #header{
       display: flex;
       list-style: none;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
     }
-    #header li a{
-      padding: 30px 30px;
-      text-decoration: none;
-      font-size: 20px;
-    }
 
-    #header li a:hover{
-      color: white;
-    }
-
-    .pink{
-      color: #ff00e4;
-    }
-    .yellow{
-      color: #f6eb00;
-    }
 
     #logo{
       padding-bottom: 25px!important;
@@ -50,13 +37,11 @@ body{
       width: 100px;
     }
     #checkout{
-      display: flex;
-      flex-direction: row;
-      text-align: center;
+      display: flex!important;
+      flex-direction: row!important;
+      //text-align: center;
     }
-    .fa-shopping-bag{
-      font-size: 30px;
-    }
+
   }
 
 
