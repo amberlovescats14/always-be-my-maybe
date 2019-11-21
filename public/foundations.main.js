@@ -13094,7 +13094,15 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     });
   };
 
-  displayFoundations();
+  displayFoundations(); //! GET CART
+
+  var getAmountInCart = function getAmountInCart() {
+    Object(_api__WEBPACK_IMPORTED_MODULE_2__["getItems"])().then(function (data) {
+      return console.log('CART DATA: ', data);
+    });
+  };
+
+  getAmountInCart();
 });
 
 /***/ }),

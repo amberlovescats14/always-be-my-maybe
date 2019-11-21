@@ -2,7 +2,14 @@
   "cart": [
     {
       "id": 1,
-      "name": "test"
+      "color": "CHOCOLATE COVERED CHERRY",
+      "description": "Shimmer",
+      "price": 18.00
+    },{
+      "id": 2,
+      "color": "CHOCOLATE COVERED CHERRY",
+      "description": "Shimmer",
+      "price": 18.00
     }
   ]
 }
