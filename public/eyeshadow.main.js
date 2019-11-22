@@ -10696,6 +10696,351 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/uuid/lib/bytesToUuid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/bytesToUuid.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/rng-browser.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/rng-browser.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+if (getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+  module.exports = function whatwgRNG() {
+    getRandomValues(rnds8);
+    return rnds8;
+  };
+} else {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+
+  module.exports = function mathRNG() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/sha1-browser.js":
+/*!***********************************************!*\
+  !*** ./node_modules/uuid/lib/sha1-browser.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Adapted from Chris Veness' SHA1 code at
+// http://www.movable-type.co.uk/scripts/sha1.html
+
+
+function f(s, x, y, z) {
+  switch (s) {
+    case 0: return (x & y) ^ (~x & z);
+    case 1: return x ^ y ^ z;
+    case 2: return (x & y) ^ (x & z) ^ (y & z);
+    case 3: return x ^ y ^ z;
+  }
+}
+
+function ROTL(x, n) {
+  return (x << n) | (x>>> (32 - n));
+}
+
+function sha1(bytes) {
+  var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
+  var H = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
+
+  if (typeof(bytes) == 'string') {
+    var msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
+    bytes = new Array(msg.length);
+    for (var i = 0; i < msg.length; i++) bytes[i] = msg.charCodeAt(i);
+  }
+
+  bytes.push(0x80);
+
+  var l = bytes.length/4 + 2;
+  var N = Math.ceil(l/16);
+  var M = new Array(N);
+
+  for (var i=0; i<N; i++) {
+    M[i] = new Array(16);
+    for (var j=0; j<16; j++) {
+      M[i][j] =
+        bytes[i * 64 + j * 4] << 24 |
+        bytes[i * 64 + j * 4 + 1] << 16 |
+        bytes[i * 64 + j * 4 + 2] << 8 |
+        bytes[i * 64 + j * 4 + 3];
+    }
+  }
+
+  M[N - 1][14] = ((bytes.length - 1) * 8) /
+    Math.pow(2, 32); M[N - 1][14] = Math.floor(M[N - 1][14]);
+  M[N - 1][15] = ((bytes.length - 1) * 8) & 0xffffffff;
+
+  for (var i=0; i<N; i++) {
+    var W = new Array(80);
+
+    for (var t=0; t<16; t++) W[t] = M[i][t];
+    for (var t=16; t<80; t++) {
+      W[t] = ROTL(W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16], 1);
+    }
+
+    var a = H[0];
+    var b = H[1];
+    var c = H[2];
+    var d = H[3];
+    var e = H[4];
+
+    for (var t=0; t<80; t++) {
+      var s = Math.floor(t/20);
+      var T = ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[t] >>> 0;
+      e = d;
+      d = c;
+      c = ROTL(b, 30) >>> 0;
+      b = a;
+      a = T;
+    }
+
+    H[0] = (H[0] + a) >>> 0;
+    H[1] = (H[1] + b) >>> 0;
+    H[2] = (H[2] + c) >>> 0;
+    H[3] = (H[3] + d) >>> 0;
+    H[4] = (H[4] + e) >>> 0;
+  }
+
+  return [
+    H[0] >> 24 & 0xff, H[0] >> 16 & 0xff, H[0] >> 8 & 0xff, H[0] & 0xff,
+    H[1] >> 24 & 0xff, H[1] >> 16 & 0xff, H[1] >> 8 & 0xff, H[1] & 0xff,
+    H[2] >> 24 & 0xff, H[2] >> 16 & 0xff, H[2] >> 8 & 0xff, H[2] & 0xff,
+    H[3] >> 24 & 0xff, H[3] >> 16 & 0xff, H[3] >> 8 & 0xff, H[3] & 0xff,
+    H[4] >> 24 & 0xff, H[4] >> 16 & 0xff, H[4] >> 8 & 0xff, H[4] & 0xff
+  ];
+}
+
+module.exports = sha1;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/v35.js":
+/*!**************************************!*\
+  !*** ./node_modules/uuid/lib/v35.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var bytesToUuid = __webpack_require__(/*! ./bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
+
+function uuidToBytes(uuid) {
+  // Note: We assume we're being passed a valid uuid string
+  var bytes = [];
+  uuid.replace(/[a-fA-F0-9]{2}/g, function(hex) {
+    bytes.push(parseInt(hex, 16));
+  });
+
+  return bytes;
+}
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+  var bytes = new Array(str.length);
+  for (var i = 0; i < str.length; i++) {
+    bytes[i] = str.charCodeAt(i);
+  }
+  return bytes;
+}
+
+module.exports = function(name, version, hashfunc) {
+  var generateUUID = function(value, namespace, buf, offset) {
+    var off = buf && offset || 0;
+
+    if (typeof(value) == 'string') value = stringToBytes(value);
+    if (typeof(namespace) == 'string') namespace = uuidToBytes(namespace);
+
+    if (!Array.isArray(value)) throw TypeError('value must be an array of bytes');
+    if (!Array.isArray(namespace) || namespace.length !== 16) throw TypeError('namespace must be uuid string or an Array of 16 byte values');
+
+    // Per 4.3
+    var bytes = hashfunc(namespace.concat(value));
+    bytes[6] = (bytes[6] & 0x0f) | version;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+
+    if (buf) {
+      for (var idx = 0; idx < 16; ++idx) {
+        buf[off+idx] = bytes[idx];
+      }
+    }
+
+    return buf || bytesToUuid(bytes);
+  };
+
+  // Function#name is not settable on some platforms (#270)
+  try {
+    generateUUID.name = name;
+  } catch (err) {
+  }
+
+  // Pre-defined namespaces, per Appendix C
+  generateUUID.DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+  generateUUID.URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+
+  return generateUUID;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/v4.js":
+/*!*********************************!*\
+  !*** ./node_modules/uuid/v4.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
+var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof(options) == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+  options = options || {};
+
+  var rnds = options.random || (options.rng || rng)();
+
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+  // Copy bytes to buffer, if provided
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+module.exports = v4;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/v5.js":
+/*!*********************************!*\
+  !*** ./node_modules/uuid/v5.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var v35 = __webpack_require__(/*! ./lib/v35.js */ "./node_modules/uuid/lib/v35.js");
+var sha1 = __webpack_require__(/*! ./lib/sha1 */ "./node_modules/uuid/lib/sha1-browser.js");
+module.exports = v35('v5', 0x50, sha1);
+
+
+/***/ }),
+
+/***/ "./node_modules/uuidv4/build/lib/uuidv4.js":
+/*!*************************************************!*\
+  !*** ./node_modules/uuidv4/build/lib/uuidv4.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const v4_1 = __importDefault(__webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js"));
+const v5_1 = __importDefault(__webpack_require__(/*! uuid/v5 */ "./node_modules/uuid/v5.js"));
+const uuidv4 = function () {
+    return v4_1.default();
+};
+exports.uuid = uuidv4;
+const regex = {
+    v4: /^(?:[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12})|(?:0{8}-0{4}-0{4}-0{4}-0{12})$/u,
+    v5: /^(?:[a-f0-9]{8}-[a-f0-9]{4}-5[a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12})|(?:0{8}-0{4}-0{4}-0{4}-0{12})$/u
+};
+exports.regex = regex;
+const isUuid = function (value) {
+    return regex.v4.test(value) || regex.v5.test(value);
+};
+exports.isUuid = isUuid;
+const empty = function () {
+    return '00000000-0000-0000-0000-000000000000';
+};
+exports.empty = empty;
+const fromString = function (text) {
+    const namespace = 'bb5d0ffa-9a4c-4d7c-8fc2-0a7d2220ba45';
+    const uuidFromString = v5_1.default(text, namespace);
+    return uuidFromString;
+};
+exports.fromString = fromString;
+
+
+/***/ }),
+
 /***/ "./public/js/api.js":
 /*!**************************!*\
   !*** ./public/js/api.js ***!
@@ -10760,7 +11105,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _products_eyeshadow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../products/eyeshadow */ "./public/js/products/eyeshadow.js");
-/* harmony import */ var _products_eyeshadow__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_products_eyeshadow__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api */ "./public/js/api.js");
 
  // import cart from '../products/cart'
@@ -10771,7 +11115,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   var cardWrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cards-wrapper');
 
   var displayEyeshadows = function displayEyeshadows() {
-    _products_eyeshadow__WEBPACK_IMPORTED_MODULE_1___default.a.forEach(function (f, i) {
+    _products_eyeshadow__WEBPACK_IMPORTED_MODULE_1__["default"].forEach(function (f, i) {
       idArr.push(f.id);
       var html = "<div class=\"col s12 m7 l2\">\n            <div class=\"card\"><br>\n            <div class=\"card-image card-img\">\n                <img src=\"../../images/eyeshadow-pot.png\" class=\"card-img\" style=\"background-color:#".concat(f.hex, "\">\n            </div>\n            <div class=\"card-content center-align\">\n                <p><h5 class=\"color\">").concat(f.color, "</h5></p><br>\n                <p>").concat(f.description, "</p>\n                <p>").concat(f.price, "</p>\n            </div>\n            <div class=\"card-action center-align\">\n                <a class=\"waves-effect waves-light btn\"\n                id=\"eyeshadows-").concat(f.id, "\"><i class=\"material-icons small\">\n                    shopping_basket</i></a>\n\n            </div>\n        </div>\n    </div>");
       cardWrapper.append(html);
@@ -10789,7 +11133,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   };
 
   var findItem = function findItem(num) {
-    _products_eyeshadow__WEBPACK_IMPORTED_MODULE_1___default.a.forEach(function (f, i) {
+    _products_eyeshadow__WEBPACK_IMPORTED_MODULE_1__["default"].forEach(function (f, i) {
       if (f.id === num) {
         console.log("found: ", f); // cart.push(f)
 
@@ -10809,10 +11153,88 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 /*!*****************************************!*\
   !*** ./public/js/products/eyeshadow.js ***!
   \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/alyssabriggs/IdeaProjects/always-be-my-maybe/public/js/products/eyeshadow.js: Unexpected character '#' (28:9)\n\n\u001b[0m \u001b[90m 26 | \u001b[39m    color\u001b[33m:\u001b[39m \u001b[32m\"ANGEL EYES\"\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 27 | \u001b[39m    description\u001b[33m:\u001b[39m \u001b[32m\"Matte\"\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 | \u001b[39m    hex\u001b[33m:\u001b[39m \u001b[33m#\u001b[39m\u001b[33mFFC0CB\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 29 | \u001b[39m    price\u001b[33m:\u001b[39m \u001b[35m18.00\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 30 | \u001b[39m  }\u001b[33m,\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 31 | \u001b[39m    id\u001b[33m:\u001b[39m uuid()\u001b[33m,\u001b[39m\u001b[0m\n    at Parser.raise (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:6930:17)\n    at Parser.readToken_numberSign (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:7279:18)\n    at Parser.getTokenFromCode (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:7623:14)\n    at Parser.nextToken (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:7150:12)\n    at Parser.next (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:7079:10)\n    at Parser.eat (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:7084:12)\n    at Parser.parseObjectProperty (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:10033:14)\n    at Parser.parseObjPropValue (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:10059:101)\n    at Parser.parseObjectMember (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9983:10)\n    at Parser.parseObj (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9903:25)\n    at Parser.parseExprAtom (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9525:28)\n    at Parser.parseExprSubscripts (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9165:23)\n    at Parser.parseMaybeUnary (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9145:21)\n    at Parser.parseExprOps (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9011:23)\n    at Parser.parseMaybeConditional (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:8984:23)\n    at Parser.parseMaybeAssign (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:8930:21)\n    at Parser.parseExprListItem (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:10252:18)\n    at Parser.parseExprList (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:10226:22)\n    at Parser.parseExprAtom (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9511:32)\n    at Parser.parseExprSubscripts (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9165:23)\n    at Parser.parseMaybeUnary (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9145:21)\n    at Parser.parseExprOps (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:9011:23)\n    at Parser.parseMaybeConditional (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:8984:23)\n    at Parser.parseMaybeAssign (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:8930:21)\n    at Parser.parseVar (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:11262:26)\n    at Parser.parseVarStatement (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:11081:10)\n    at Parser.parseStatementContent (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:10678:21)\n    at Parser.parseStatement (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:10611:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:11187:25)\n    at Parser.parseBlockBody (/Users/alyssabriggs/IdeaProjects/always-be-my-maybe/node_modules/@babel/parser/lib/index.js:11174:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var _require = __webpack_require__(/*! uuidv4 */ "./node_modules/uuidv4/build/lib/uuidv4.js"),
+    uuid = _require.uuid;
+
+var eyeshadows = [{
+  id: uuid(),
+  color: "CHOCO-CHERRY",
+  description: "Shimmer",
+  hex: '804541',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "SUNSET GLOW",
+  description: "Shimmer",
+  hex: 'ffc922',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "NUDE ROSE",
+  description: "Shimmer",
+  hex: 'fbc398',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "SILVER LINING",
+  description: "Shimmer",
+  hex: 'aaa9ad',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "ANGEL EYES",
+  description: "Matte",
+  hex: 'E97451',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "FRENCH ROAST",
+  description: "Matte",
+  hex: '8A3324',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "LEMON GRASS",
+  description: "Matte",
+  hex: 'FBEC5D',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "LAGOON",
+  description: "Matte",
+  hex: '177245',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "BUBBLE GUM",
+  description: "Cream",
+  hex: 'E75480',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "FOXIER",
+  description: "Cream",
+  hex: 'B22222',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "PACIFIC COAST",
+  description: "Cream",
+  hex: 'F4C430',
+  price: 18.00
+}, {
+  id: uuid(),
+  color: "DEEP DIVE",
+  description: "Cream",
+  hex: '082567',
+  price: 18.00
+}];
+/* harmony default export */ __webpack_exports__["default"] = (eyeshadows);
 
 /***/ })
 
