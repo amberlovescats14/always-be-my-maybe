@@ -3,32 +3,18 @@ body{
 
   header{
     background-color: black;
-    height: 12vh;
+    height: 18vh;
+
     #header{
       display: flex;
       list-style: none;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
     }
-    #header li a{
-      padding: 30px 30px;
-      text-decoration: none;
-      font-size: 20px;
-    }
 
-    #header li a:hover{
-      color: white;
-    }
-
-    .pink{
-      color: #ff00e4;
-    }
-    .yellow{
-      color: #f6eb00;
-    }
 
     #logo{
-      padding-bottom: 25px!important;
+      padding-bottom: 10px;
       display: inline-block;
     }
     .logoTop{
@@ -36,27 +22,28 @@ body{
       color: #ef2ece;
       background-color: #f5eb36;
       width: 100px;
+      height: 30px;
     }
     .logoMid{
       text-align: center;
       color: #efeb27;
       background-color: #41c848;
       width: 100px;
+      height: 30px;
     }
     .logoBottom{
       text-align: center;
       color: #f81101;
       background-color: #39c5f8;
       width: 100px;
+      height: 30px;
     }
     #checkout{
-      display: flex;
-      flex-direction: row;
-      text-align: center;
+      display: flex!important;
+      flex-direction: row!important;
+      //text-align: center;
     }
-    .fa-shopping-bag{
-      font-size: 30px;
-    }
+
   }
 
 
@@ -94,6 +81,7 @@ body{
     text-align: center;
     height: 300px;
     width: 200px;
+
   }
   .shopButton{
 
