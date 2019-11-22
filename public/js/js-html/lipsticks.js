@@ -13,10 +13,10 @@ $(document).ready(function(){
                 `<div class="col s12 m7 l2">
             <div class="card"><br>
             <div class="card-image card-img">
-                <img src="../../images/lipstick-1.png" style="background-color:#${f.hex}">
+                <img src="../../images/lipstick-1.png" class="card-img" style="background-color:#${f.hex}">
             </div>
             <div class="card-content center-align">
-                <p><h5>${f.color}</h5></p><br>
+                <p><h5 class="color">${f.color}</h5></p><br>
                 <p>${f.description}</p>
                 <p>${f.price}</p>
             </div>
