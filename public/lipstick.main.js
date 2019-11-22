@@ -11045,15 +11045,17 @@ exports.fromString = fromString;
 /*!**************************!*\
   !*** ./public/js/api.js ***!
   \**************************/
-/*! exports provided: getItems, postItem */
+/*! exports provided: getItems, postItem, deleteItem */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getItems", function() { return getItems; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postItem", function() { return postItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+ // import axios from 'axios'
 
 var getItems = function getItems() {
   return fetch('/api/cart').then(function (res) {
@@ -11063,21 +11065,29 @@ var getItems = function getItems() {
   });
 };
 var postItem = function postItem(item) {
-  var id = item.id,
-      color = item.color,
-      description = item.description,
-      price = item.price;
-  var options = {
+  var config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(item)
   };
-  return fetch('/api/cart', options).then(function (res) {
+  return fetch('/api/cart', config);
+};
+var deleteItem = function deleteItem(id) {
+  console.log("id: ", id);
+  var config = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  return fetch("/api/cart/".concat(id), config).then(function (res) {
     return res.json();
-  })["catch"](function () {
-    return console.log("POST ERROR");
+  }).then(function (data) {
+    return data;
+  })["catch"](function (e) {
+    return console.log(e);
   });
 };
 
