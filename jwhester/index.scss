@@ -3,8 +3,7 @@ body{
 
   header{
     background-color: black;
-    height: 20vh;
-    border: 2px solid yellow;
+    height: 18vh;
 
     #header{
       display: flex;
@@ -15,7 +14,7 @@ body{
 
 
     #logo{
-      padding-bottom: 25px!important;
+      padding-bottom: 10px;
       display: inline-block;
     }
     .logoTop{
@@ -23,18 +22,21 @@ body{
       color: #ef2ece;
       background-color: #f5eb36;
       width: 100px;
+      height: 30px;
     }
     .logoMid{
       text-align: center;
       color: #efeb27;
       background-color: #41c848;
       width: 100px;
+      height: 30px;
     }
     .logoBottom{
       text-align: center;
       color: #f81101;
       background-color: #39c5f8;
       width: 100px;
+      height: 30px;
     }
     #checkout{
       display: flex!important;
@@ -79,6 +81,7 @@ body{
     text-align: center;
     height: 300px;
     width: 200px;
+
   }
   .shopButton{
 
