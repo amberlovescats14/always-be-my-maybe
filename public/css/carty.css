@@ -1,0 +1,33 @@
+#cart {
+  width: 100%;
+  padding: 0 30px;
+}
+#banner {
+  /*padding: 30px;*/
+}
+
+#banner {
+  height: 200px;
+  /*padding: 5%*/
+}
+#banner > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#coupon {
+  color: #FFFFFF;
+  text-shadow: 4px 3px 0px #7A7A7A;
+  font-size: 5vh;
+}
+#hr-one {
+  height: 5px;
+  background: black;
+  border-radius: 30%;
+}
+/*#card-wrapper {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*}*/
