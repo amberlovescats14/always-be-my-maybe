@@ -10763,16 +10763,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
-  var cartID = []; //! GET CART
+  var cartID = [];
+  var cartTotal = 0; //! handles
+
+  var wrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#card-wrapper'); //! GET CART
 
   var requestCart = function requestCart() {
     Object(_api__WEBPACK_IMPORTED_MODULE_1__["getItems"])().then(function (data) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cart-amount').html("".concat(data.length, " Items in Cart"));
       console.log("data", data);
-      var wrapper = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#card-wrapper');
       wrapper.html('');
       data.forEach(function (d, i) {
         cartID.push(d.id);
+        cartTotal += d.price;
         var html = "  <div class=\"col s12 m6 l4\">\n    <div class=\"card horizontal\">\n      <div class=\"card-image\">\n        <img src=\"https://images.unsplash.com/photo-1498842812179-c81beecf902c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=60\">\n      </div>\n      <div class=\"card-stacked\">\n        <div class=\"card-content\">\n        <p class=\"center\">".concat(d.color, "</p>\n        <hr>\n          <p class=\"center\">").concat(d.description, "</p>\n          <p class=\"center\">").concat(d.price, "</p>\n        </div>\n        <div class=\"card-action\">\n<a class=\"btn-floating btn-small waves-effect waves-light grey lighten-4 right\"\nid=\"delete-").concat(d.id, "\"><i class=\"material-icons\">clear</i></a>\n       </div>\n      </div>\n    </div>\n  </div>");
         wrapper.append(html);
       });

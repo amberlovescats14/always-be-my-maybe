@@ -3,6 +3,9 @@ import { getItems, deleteItem } from '../api'
 
 $(document).ready(function () {
     let cartID = []
+    let cartTotal = 0
+    //! handles
+    let wrapper = $('#card-wrapper')
     
     //! GET CART
    const requestCart = () => {
@@ -10,10 +13,10 @@ $(document).ready(function () {
            .then(data =>{
                $('#cart-amount').html(`${data.length} Items in Cart`)
                console.log("data", data)
-               let wrapper = $('#card-wrapper')
                wrapper.html('')
                data.forEach((d,i)=> {
                    cartID.push(d.id)
+                   cartTotal += d.price
                    let html =
                        `  <div class="col s12 m6 l4">
     <div class="card horizontal">
@@ -35,8 +38,11 @@ id="delete-${d.id}"><i class="material-icons">clear</i></a>
     </div>
   </div>`
                    wrapper.append(html)
+                
                })
                addEventListener(cartID, data)
+
+
            })
    }
    
