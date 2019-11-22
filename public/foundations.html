@@ -11,12 +11,26 @@
   <link rel="stylesheet" href="./css/foundations.css">
 
   <title>Products</title>
+
+  <style>
+    .container {
+      width: 1070px; /* specify a width */
+      margin: 0 auto;  /* centers the container */
+      padding: 0 15px; /* adds some padding to the left and right*/
+    }
+
+    .jumbotron .container {
+      max-width: 100%; /* allows the jumbotron to adjust on smaller widths */
+    }
+  </style>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('.sidenav');
       var instances = M.Sidenav.init(elems);
     });
   </script>
+
 </head>
 <body id="foundations">
 
@@ -43,7 +57,11 @@
 </ul>
 <!-- end nav -->
 <!-- Banner -->
-<img src="./images/jumbotron.jpeg" alt="img" class="responsive-img" id="banner-foundation">
+<div class="jumbotron">
+  <div class="container">
+    <img src="./images/found-face.jpeg" alt="img" class="responsive-img" id="banner-foundation">
+  </div>
+</div>
 <!-- end banner -->
 <!-- cards -->
 <div id="cards-wrapper" class="row"></div>

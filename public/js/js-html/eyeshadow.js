@@ -1,19 +1,19 @@
 import $ from 'jquery'
-import lipsticks from '../products/lipsticks'
+import eyeshadows from '../products/eyeshadow'
 // import cart from '../products/cart'
 import {getItems, postItem } from '../api'
 
 $(document).ready(function(){
     let idArr = []
     let cardWrapper = $('#cards-wrapper')
-    const displayLipsticks = () => {
-        lipsticks.forEach((f,i)=> {
+    const displayEyeshadows = () => {
+        eyeshadows.forEach((f,i)=> {
             idArr.push(f.id)
             let html =
                 `<div class="col s12 m7 l2">
             <div class="card"><br>
             <div class="card-image card-img">
-                <img src="../../images/lipstick-1.png" class="card-img" style="background-color:#${f.hex}">
+                <img src="../../images/eyeshadow-pot.png" class="card-img" style="background-color:#${f.hex}">
             </div>
             <div class="card-content center-align">
                 <p><h5 class="color">${f.color}</h5></p><br>
@@ -22,7 +22,7 @@ $(document).ready(function(){
             </div>
             <div class="card-action center-align">
                 <a class="waves-effect waves-light btn"
-                id="lipstick-${f.id}"><i class="material-icons small">
+                id="eyeshadows-${f.id}"><i class="material-icons small">
                     shopping_basket</i></a>
 
             </div>
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     const addToCart = arr => {
         arr.forEach(a => {
-            $(`#lipstick-${a}`).click(function () {
+            $(`#eyeshadows-${a}`).click(function () {
                 console.log("clicked", a)
                 findItem(a)
             })
@@ -44,18 +44,18 @@ $(document).ready(function(){
 
 
     const findItem = (num) => {
-        lipsticks.forEach((f,i)=> {
+        eyeshadows.forEach((f,i)=> {
             if(f.id === num){
                 console.log("found: ", f)
                 // cart.push(f)
                 postItem(f)
                 console.log("cart: ", cart)
-                return alert(`Lipstick ${f.color} Added To Cart`)
+                return alert(`Eyeshadow ${f.color} Added To Cart`)
             }
         })
     }
 
-    displayLipsticks()
+    displayEyeshadows()
 
 })
 

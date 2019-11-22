@@ -9,7 +9,9 @@ module.exports = {
   entry: {
     index : './public/js/index.js',
     foundations: './public/js/js-html/foundations.js',
-    cart: './public/js/js-html/cart.js'
+    cart: './public/js/js-html/cart.js',
+    lipstick: './public/js/js-html/lipsticks.js',
+    eyeshadow: './public/js/js-html/eyeshadow.js'
 
   },
   // where to put the transpiled javascript
