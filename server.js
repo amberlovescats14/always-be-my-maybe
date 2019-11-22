@@ -15,7 +15,7 @@ app.use(express.json({extended: false}))
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 //!ROUTES
-app.use('/api/cart', require('./routes/cartRouter'))
+app.use('/api/cart', require('./cartRouter'))
 
 
 
