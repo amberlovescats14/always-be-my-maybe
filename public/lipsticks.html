@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--  END MATERIAL-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/found.css">
+    <title>Lipsticks</title>
+    <style>
+        img {
+            max-height: 300px;
+            max-width: 30px;
+            background-color: goldenrod;
+        }
+        .card-img {
+            display: flex;
+            justify-content: center;
+        }
+        h5 {
+            height: 40px;
+            width: 100%;
+        }
+        .container {
+            width: 1070px; /* specify a width */
+            margin: 0 auto;  /* centers the container */
+            padding: 0 15px; /* adds some padding to the left and right*/
+        }
+
+        .jumbotron .container {
+            max-width: 100%; /* allows the jumbotron to adjust on smaller widths */
+        }
+    </style>
+</head>
+<body id="lipsticks">
+<header class="sticky-top">
+    <ul id="header">
+        <li><a class="pink" href="">MAKEUP</a></li>
+        <li><a class="yellow" href="">BRUSHES + TOOLS</a></li>
+        <li id="logo">
+            <div class="logoTop">ALWAYS</div>
+            <div class="logoMid">BE MY</div>
+            <div class="logoBottom">MAYBE</div>
+        </li>
+        <li><a class="pink" href="">ACCESSORIES</a></li>
+        <li><a class="yellow" href="">LOTION</a></li>
+        <li id="checkout"><a class="pink" href=""><i class="fas fa-shopping-bag"></i>
+            <p class="yellow">$0.00</p></a></li>
+    </ul>
+</header>
+<!-- end nav -->
+<!-- Banner -->
+<div class="jumbotron">
+    <div class="container">
+        <img src="./images/jumbotron2.jpeg" alt="img" class="responsive-img" id="banner-foundation">
+    </div>
+</div>
+<!-- end banner -->
+<!-- cards -->
+<div id="cards-wrapper" class="row"></div>
+<!-- end cards -->
+
+
+
+<!-- jquery -->
+<script
+        src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+<!-- materialize -->
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- custum -->
+<script src="./lipstick.main.js"></script>
+</body>
+</html>
