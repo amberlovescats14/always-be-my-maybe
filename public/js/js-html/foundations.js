@@ -10,10 +10,10 @@ $(document).ready(function(){
     foundations.forEach((f,i)=> {
       idArr.push(f.id)
       let html =
-          `<div class="col s12 m6 l2">
+          `<div class="col s12 m6 l2" id="foundation-card">
             <div class="card"><br>
             <div class="card-image card-img">
-                <img src="https://blog.andersonhopkins.com/wp-content/uploads/2014/08/051614_GenericFoundation_Smear_FINAL.jpg">
+                <img src="https://blog.andersonhopkins.com/wp-content/uploads/2014/08/051614_GenericFoundation_Smear_FINAL.jpg" id="foundation-image">
             </div>
             <div class="card-content center-align">
                 <p><h5>${f.color}</h5></p><br>
