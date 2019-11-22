@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import axios from 'axios'
+// import axios from 'axios'
 
 export const getItems = () => {
     return fetch('/api/cart')
@@ -16,4 +16,19 @@ export const postItem = (item) => {
         body: JSON.stringify(item)
     }
     return fetch('/api/cart', config)
+}
+
+export const deleteItem = id => {
+    console.log("id: ", id)
+    let config = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`/api/cart/${id}`, config)
+        .then((res)=> res.json())
+        .then((data)=> data)
+        .catch((e)=> console.log(e))
+
 }

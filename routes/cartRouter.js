@@ -5,7 +5,7 @@ const {cart } = data
 
 router.get('/', async (req,res)=> {
     try {
-        return res.json(cart)
+        return await res.json(cart)
     } catch (e) {
         console.log(`GET ERROR`, e)
     }
@@ -14,29 +14,35 @@ router.get('/', async (req,res)=> {
 router.post('/', async (req,res) => {
       try {
           let item = req.body
-          cart.push(item)
-          return res.json(cart)
+          await cart.push(item)
+          return res.json({
+              msg: `POST CREATED`,
+              content: cart
+          })
 
         } catch (err) {
             console.log(`POST ERROR`, err)
         }
 })
 
-// router.delete('/', async (req,res)=> {
-//       try {
-//           let id = req.body.id.toString()
-//           let some = cart.some(c => c.id == req.body.id)
-//           if(!some) return `Item not found`
-//           let sliceID
-//           let filter = cart.forEach((c,i)=> {
-//               if(id == c.id) sliceID = i
-//           })
-//           cart.splice(sliceID,1)
-//           return console.log(`Item Deleted`)
-//         } catch (err) {
-//             console.log(`DELTE ERROR`, err)
-//         }
-// })
+router.delete('/:id', async (req,res)=> {
+      try {
+        let id = req.params.id
+        //! find it, return true or false
+          let some = await cart.some(c => c.id == id)
+          if(!some) return console.log("item not found")
+
+          //! splice it
+          let index
+          let filter = cart.forEach((c,i)=> {
+              if(id == c.id) index = i
+          })
+          await cart.splice(index,1)
+          return res.json(cart)
+        } catch (err) {
+            console.log(`DELTE ERROR`, err)
+        }
+})
 
 
 
