@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import foundations from '../products/foundations'
-import cart from '../products/cart'
-import {postItem } from '../api'
+// import cart from '../products/cart'
+import {getItems, postItem } from '../api'
 
 $(document).ready(function(){
   let idArr = []
@@ -49,13 +49,23 @@ $(document).ready(function(){
         console.log("found: ", f)
         // cart.push(f)
         postItem(f)
-        console.log("cart: ", cart)
-        return alert(`Foundation ${f.color} Added To Cart`)
+            .then((res)=> res.json())
+            .then((data)=> console.log("DATA", data))
+            .catch(()=> console.log(`POST ERROR`))
+        // console.log("cart: ", cart)
+        // return alert(`Foundation ${f.color} Added To Cart`)
       }
     })
   }
   
   displayFoundations()
+  
+  //! GET CART
+  const getAmountInCart = () => {
+    getItems()
+        .then(data => console.log('CART DATA: ', data))
+  }
+  getAmountInCart()
   
 })
 
