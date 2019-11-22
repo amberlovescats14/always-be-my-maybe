@@ -25,43 +25,51 @@ const eyeshadows = [
     id: uuid(),
     color: "ANGEL EYES",
     description: "Matte",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "FRENCH ROAST",
     description: "Matte",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "LEMON GRASS",
     description: "Matte",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "LAGOON",
     description: "Matte",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "BUBBLE GUM",
     description: "Cream",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "FOXIER",
     description: "Cream",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "PACIFIC COAST",
     description: "Cream",
+    hex: #FFC0CB,
     price: 18.00
   }, {
     id: uuid(),
     color: "DEEP DIVE",
     description: "Cream",
+    hex: #FFC0CB,
     price: 18.00
   }
 ]
 
-module.exports = eyeshadows
+export default eyeshadows
