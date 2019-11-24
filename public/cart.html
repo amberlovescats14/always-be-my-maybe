@@ -10,11 +10,44 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--    CUSTOM-->
     <link rel="stylesheet" href="./css/carty.css">
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
 </head>
 <body id="cart">
-<div class="black">
-    <h1 class="brand-logo center white-text" id="cart-amount">cart</h1>
-</div>
+<!--<div class="black">-->
+<!--    <h1 class="brand-logo center white-text" id="cart-amount">cart</h1>-->
+<!--</div>-->
+<!--START NAV-->
+<nav class="nav-extended black">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo pink-text">Logo</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons pink-text">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="lipsticks.html">Lipstick</a></li>
+            <li><a href="foundations.html">Foundations</a></li>
+            <li><a href="eyeshadows.html">Eye Shadows</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="lipsticks.html">Lipstick</a></li>
+    <li><a href="foundations.html">Foundations</a></li>
+    <li><a href="eyeshadows.html">Eye Shadows</a></li>
+    <li><a href="cart.html">Cart</a></li>
+</ul>
+<!-- end nav -->
+<!--END NAV-->
 <!--banner-->
 
 <div id="banner" class="card">
